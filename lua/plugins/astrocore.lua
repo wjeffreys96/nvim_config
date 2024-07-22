@@ -19,7 +19,7 @@ return {
     },
     -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
     diagnostics = {
-      virtual_text = false,
+      virtual_text = true,
       underline = true,
     },
     -- vim options can be configured here
@@ -57,13 +57,28 @@ return {
           end,
           desc = "Close buffer from tabline",
         },
-
+        -- Search and replace mappings
+        ["<leader>r"] = { desc = "Replace" },
+        ["<Leader>rs"] = {
+          ":%s///g<Left><Left><Left>",
+          desc = "Search and replace",
+        },
+        ["<Leader>rw"] = {
+          ":%s/<C-r><C-w>//g<Left><Left>",
+          desc = "Replace word under cursor",
+        },
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
         -- ["<Leader>b"] = { desc = "Buffers" },
 
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
+      },
+      v = {
+        ["<Leader>r"] = {
+          '"zy:%s/<C-r>z//g<Left><Left>',
+          desc = "Replace highlighted text",
+        },
       },
     },
   },
