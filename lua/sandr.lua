@@ -2,7 +2,7 @@ local M = {}
 
 local function replace_prompt(search_term)
   -- Prompt for input
-  vim.ui.input({ prompt = "Replace " .. search_term .. " with: " }, function(input)
+  vim.ui.input({ prompt = "Replace " .. search_term .. " with::" }, function(input)
     if input then
       -- Perform the replacement
       vim.cmd(string.format("%%s/%s/%s/g", search_term:gsub("/", "\\/"), input:gsub("/", "\\/")))
@@ -11,7 +11,7 @@ local function replace_prompt(search_term)
 end
 
 function M.search_and_replace()
-  vim.ui.input({ prompt = "Search for: " }, function(input)
+  vim.ui.input({ prompt = "Search for::" }, function(input)
     if input then replace_prompt(input) end
   end)
 end
