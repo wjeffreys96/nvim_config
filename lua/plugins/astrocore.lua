@@ -58,13 +58,12 @@ return {
           desc = "Close buffer from tabline",
         },
         -- Search and replace mappings
-        ["<leader>r"] = { desc = "Replace" },
         ["<Leader>rs"] = {
-          ":%s///g<Left><Left><Left>",
+          function() require("sandr").search_and_replace() end,
           desc = "Search and replace",
         },
         ["<Leader>rw"] = {
-          ":%s/<C-r><C-w>//g<Left><Left>",
+          function() require("sandr").replace_word_under_cursor() end,
           desc = "Replace word under cursor",
         },
         -- tables with just a `desc` key will be registered with which-key if it's installed
@@ -76,7 +75,7 @@ return {
       },
       v = {
         ["<Leader>r"] = {
-          '"zy:%s/<C-r>z//g<Left><Left>',
+          function() require("sandr").replace_visual_selection() end,
           desc = "Replace highlighted text",
         },
       },
