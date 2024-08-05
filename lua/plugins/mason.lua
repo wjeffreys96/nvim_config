@@ -13,7 +13,7 @@ return {
         "lua_ls",
         "basedpyright",
         "clangd",
-        "eslint",
+        -- "eslint",
         "jsonls",
         "rust_analyzer",
         -- add more arguments for adding more language servers
