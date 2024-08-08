@@ -11,7 +11,7 @@ local fmt = require("luasnip.extras.fmt").fmt
 ls.add_snippets("javascript", {
   s(
     "af",
-    fmt("const {} = ({}) => {{ \n\t{} \n}};", {
+    fmt([[const {} = ({}) => {{ \n\t{} \n}};]], {
       iNode(1, "funcName"),
       iNode(2, "params"),
       iNode(3, "body"),
