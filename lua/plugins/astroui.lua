@@ -10,10 +10,9 @@ return {
     colorscheme = "tokyonight",
     -- AstroUI allows you to easily modify highlight groups easily for any and all colorschemes
     highlights = {
-      init = { -- this table overrides highlights in all themes
-        variables = { fg = "#f2578d" },
+      init = {
+        -- this table overrides highlights in all themes
         DiagnosticUnnecessary = { fg = "#567494" },
-        comments = { italic = true, fg = "#567494" },
       },
       astrodark = { -- a table of overrides/changes when applying the astrotheme theme
         -- Normal = { bg = "#000000" },
