@@ -14,6 +14,7 @@ return {
         "clangd",
         "eslint",
         "rust_analyzer",
+        "r_language_server",
         -- add more arguments for adding more language servers
       })
     end,
