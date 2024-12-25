@@ -1,7 +1,5 @@
 -- AstroCore provides a central place to modify mappings, vim options, autocommands, and more!
 -- Configuration documentation can be found with `:h astrocore`
--- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
---       as this provides autocomplete and documentation while editing
 
 ---@type LazySpec
 return {
@@ -19,7 +17,7 @@ return {
     },
     -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
     diagnostics = {
-      virtual_text = true,
+      virtual_text = false,
       underline = true,
     },
     -- vim options can be configured here
@@ -57,15 +55,7 @@ return {
           end,
           desc = "Close buffer from tabline",
         },
-        -- Search and replace mappings
-        ["<Leader>rs"] = {
-          function() require("sandr").search_and_replace() end,
-          desc = "Search and replace",
-        },
-        ["<Leader>rw"] = {
-          function() require("sandr").replace_word_under_cursor() end,
-          desc = "Replace word under cursor",
-        },
+
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
         -- ["<Leader>b"] = { desc = "Buffers" },
@@ -73,12 +63,7 @@ return {
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
       },
-      v = {
-        ["<Leader>r"] = {
-          function() require("sandr").replace_visual_selection() end,
-          desc = "Replace highlighted text",
-        },
-      },
+      v = {},
     },
   },
 }
