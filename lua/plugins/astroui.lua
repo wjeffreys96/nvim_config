@@ -12,10 +12,11 @@ return {
     highlights = {
       init = {
         -- this table overrides highlights in all themes
-        DiagnosticUnnecessary = { fg = "#567494" },
+        -- DiagnosticUnnecessary = { fg = "#567494" },
       },
       astrodark = { -- a table of overrides/changes when applying the astrotheme theme
         -- Normal = { bg = "#000000" },
+        -- ["@type.builtin.c"] = { fg = "#fff" },
       },
     },
     -- Icons can be configured throughout the interface
