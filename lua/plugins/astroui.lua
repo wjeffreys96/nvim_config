@@ -15,8 +15,11 @@ return {
         -- DiagnosticUnnecessary = { fg = "#567494" },
       },
       astrodark = { -- a table of overrides/changes when applying the astrotheme theme
-        -- Normal = { bg = "#000000" },
-        -- ["@type.builtin.c"] = { fg = "#fff" },
+        MatchParen = { fg = "#f5f5f5", bg = "#424242" },
+        Constant = { fg = "#ff7043" },
+        Identifier = { fg = "#eeeeee" },
+        Structure = { fg = "#dd97f1" },
+        ["@type.builtin"] = { italic = true, fg = "#ffb74d" },
       },
     },
     -- Icons can be configured throughout the interface

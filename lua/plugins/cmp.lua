@@ -22,6 +22,6 @@ return { -- override nvim-cmp plugin
       ["<C-e>"] = cmp.mapping.abort(),
       ["<CR>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true },
     }
-    opts.experimental = { ghost_text = true }
+    -- opts.experimental = { ghost_text = true }
   end,
 }
