@@ -47,11 +47,6 @@ return {
     },
     -- customize how language servers are attached
     handlers = {
-      clangd = function(_, opts)
-        if vim.fn.getcwd() == "/home/will/Repos/oresat/oresat-firmware/" then
-          opts.cmd = { "clangd", "--query-driver/usr/bin/arm-none-eabi-gcc" }
-        end
-      end,
       -- a function without a key is simply the default handler, functions take two parameters, the server name and the configured options table for that server
       -- function(server, opts) require("lspconfig")[server].setup(opts) end
 

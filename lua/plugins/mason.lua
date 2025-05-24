@@ -11,7 +11,6 @@ return {
       opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
         "lua_ls",
         "basedpyright",
-        "clangd",
         "eslint",
         "rust_analyzer",
         "r_language_server",
