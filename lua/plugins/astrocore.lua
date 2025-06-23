@@ -55,6 +55,44 @@ return {
           end,
           desc = "Close buffer from tabline",
         },
+        -- Molten keybinds
+        ["<Leader>mi"] = {
+          function() vim.cmd ":MoltenInit" end,
+          desc = "Initialize Molten",
+        },
+        ["<Leader>me"] = {
+          function() vim.cmd "MoltenEvaluateOperator" end,
+          desc = "Evaluate Operator",
+        },
+        ["<Leader>ml"] = {
+          function() vim.cmd "MoltenEvaluateLine" end,
+          desc = "Evaluate Line",
+        },
+        ["<Leader>mc"] = {
+          function() vim.cmd "MoltenEvaluateCell" end,
+          desc = "Evaluate Cell",
+        },
+
+        ["<Leader>md"] = {
+          function() vim.cmd "MoltenDelete" end,
+          desc = "Delete Cell",
+        },
+        ["<Leader>mh"] = {
+          function() vim.cmd "MoltenHideOutput" end,
+          desc = "Hide Output",
+        },
+        ["<Leader>mo"] = {
+          function() vim.cmd ":noautocmd MoltenEnterOutput" end,
+          desc = "Show/Enter Output",
+        },
+        ["<Leader>mx"] = {
+          function() vim.cmd ":MoltenExportOutput!" end,
+          desc = "Export file",
+        },
+        ["<Leader>mm"] = {
+          function() vim.cmd ":MoltenImportOutput" end,
+          desc = "Import File",
+        },
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
         -- ["<Leader>b"] = { desc = "Buffers" },
@@ -62,7 +100,13 @@ return {
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
       },
-      v = {},
+      -- Visual Mode
+      v = {
+        ["<Leader>mv"] = {
+          ":<C-u>MoltenEvaluateVisual<CR>gv",
+          desc = "Evaluate Visual",
+        },
+      },
     },
   },
 }
