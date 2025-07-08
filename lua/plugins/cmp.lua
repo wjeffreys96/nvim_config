@@ -20,7 +20,7 @@ return { -- override nvim-cmp plugin
       ["<C-j>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
       ["<C-k>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
       ["<C-e>"] = cmp.mapping.abort(),
-      ["<CR>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true },
+      ["<C-l>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true },
     }
     -- opts.experimental = { ghost_text = true }
   end,
