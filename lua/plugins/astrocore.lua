@@ -65,10 +65,6 @@ return {
           function() vim.cmd ":MoltenInit" end,
           desc = "Initialize Molten",
         },
-        ["<Leader>me"] = {
-          function() vim.cmd "MoltenEvaluateOperator" end,
-          desc = "Evaluate Operator",
-        },
         ["<Leader>ml"] = {
           function() vim.cmd "MoltenEvaluateLine" end,
           desc = "Evaluate Line",
@@ -89,17 +85,9 @@ return {
           function() vim.cmd ":noautocmd MoltenEnterOutput" end,
           desc = "Show/Enter Output",
         },
-        ["<Leader>mn"] = {
-          function() vim.cmd ":MoltenNext" end,
-          desc = "Next Cell",
-        },
         ["<Leader>mp"] = {
           function() vim.cmd ":MoltenPrev" end,
           desc = "Previous Cell",
-        },
-        ["<Leader>mx"] = {
-          function() vim.cmd ":MoltenOpenInBrowser" end,
-          desc = "Open Cell In Browser",
         },
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
