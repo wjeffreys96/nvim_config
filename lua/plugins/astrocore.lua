@@ -46,6 +46,7 @@ return {
       -- first key is the mode
       n = {
         -- second key is the lefthand side of the map
+        ["<Leader>e"] = { function() require("snacks.explorer").open() end, desc = "Toggle Explorer" },
 
         -- navigate buffer tabs
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
@@ -61,6 +62,7 @@ return {
           desc = "Close buffer from tabline",
         },
         -- Molten keybinds
+        ["<Leader>m"] = { desc = "Molten" },
         ["<Leader>mi"] = {
           function() vim.cmd ":MoltenInit" end,
           desc = "Initialize Molten",
