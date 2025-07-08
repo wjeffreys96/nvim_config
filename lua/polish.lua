@@ -1,5 +1,5 @@
--- disable mouse
-vim.opt.mouse = ""
+if true then return end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 
--- set pyenv venv
-vim.g.python3_host_prog = "/home/will/.pyenv/versions/neovim3/bin/python"
+-- This will run last in the setup process.
+-- This is just pure lua so anything that doesn't
+-- fit in the normal config locations above can go here
