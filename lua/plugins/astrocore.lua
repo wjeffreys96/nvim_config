@@ -46,7 +46,7 @@ return {
       -- first key is the mode
       n = {
         -- second key is the lefthand side of the map
-        ["<Leader>e"] = { function() require("snacks.explorer").open() end, desc = "Toggle Explorer" },
+        -- ["<Leader>e"] = { function() require("snacks.explorer").open() end, desc = "Toggle Explorer" },
 
         -- navigate buffer tabs
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
