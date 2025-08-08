@@ -52,59 +52,16 @@ return {
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
 
-        -- mappings seen under group name "Buffer"
-        ["<Leader>bd"] = {
-          function()
-            require("astroui.status.heirline").buffer_picker(
-              function(bufnr) require("astrocore.buffer").close(bufnr) end
-            )
-          end,
-          desc = "Close buffer from tabline",
-        },
-        -- Molten keybinds
-        ["<Leader>m"] = { desc = "Molten" },
-        ["<Leader>mi"] = {
-          function() vim.cmd ":MoltenInit" end,
-          desc = "Initialize Molten",
-        },
-        ["<Leader>ml"] = {
-          function() vim.cmd "MoltenEvaluateLine" end,
-          desc = "Evaluate Line",
-        },
-        ["<Leader>mr"] = {
-          function() vim.cmd "MoltenReevaluateCell" end,
-          desc = "Re-evaluate Cell",
-        },
-        ["<Leader>md"] = {
-          function() vim.cmd "MoltenDelete" end,
-          desc = "Delete Cell",
-        },
-        ["<Leader>mh"] = {
-          function() vim.cmd "MoltenHideOutput" end,
-          desc = "Hide Output",
-        },
-        ["<Leader>mo"] = {
-          function() vim.cmd ":noautocmd MoltenEnterOutput" end,
-          desc = "Show/Enter Output",
-        },
-        ["<Leader>mp"] = {
-          function() vim.cmd ":MoltenPrev" end,
-          desc = "Previous Cell",
-        },
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
         -- ["<Leader>b"] = { desc = "Buffers" },
+        ["<Leader>r"] = { desc = "Rust Tools" }
 
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
       },
       -- Visual Mode
-      v = {
-        ["<Leader>mv"] = {
-          ":<C-u>MoltenEvaluateVisual<CR>gv",
-          desc = "Evaluate Visual",
-        },
-      },
+      v = {},
     },
   },
 }

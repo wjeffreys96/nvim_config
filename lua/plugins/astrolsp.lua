@@ -1,8 +1,5 @@
 -- AstroLSP allows you to customize the features in AstroNvim's LSP configuration engine
 -- Configuration documentation can be found with `:h astrolsp`
--- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
---       as this provides autocomplete and documentation while editing
-
 ---@type LazySpec
 return {
   "AstroNvim/astrolsp",
@@ -43,16 +40,26 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
-      -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
+      rust_analyzer = {
+        settings = {
+          ["rust-analyzer"] = {
+            cargo = {
+              extraEnv = { CARGO_PROFILE_RUST_ANALYZER_INHERITS = "dev" },
+              extraArgs = { "--profile", "rust-analyzer" },
+              allTargets = false,
+            },
+          },
+        },
+      },
     },
     -- customize how language servers are attached
     handlers = {
       clangd = function(_, opts)
         -- if vim.fn.getcwd() == "/home/will/Repos/oresat/oresat-firmware" then
-          opts.cmd = {
-            "clangd",
-            "--query-driver=/usr/bin/arm-none-eabi-gcc",
-          }
+        opts.cmd = {
+          "clangd",
+          "--query-driver=/usr/bin/arm-none-eabi-gcc",
+        }
         -- end
         ---@diagnostic disable: param-type-mismatch
         require("lspconfig")["clangd"].setup(opts)
@@ -81,6 +88,7 @@ return {
           -- the rest of the autocmd options (:h nvim_create_autocmd)
           desc = "Refresh codelens (buffer)",
           callback = function(args)
+            ---@diagnostic disable-next-line: undefined-field
             if require("astrolsp").config.features.codelens then vim.lsp.codelens.refresh { bufnr = args.buf } end
           end,
         },
@@ -99,6 +107,7 @@ return {
           function() require("astrolsp.toggles").buffer_semantic_tokens() end,
           desc = "Toggle LSP semantic highlight (buffer)",
           cond = function(client)
+            ---@diagnostic disable-next-line: missing-parameter
             return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens ~= nil
           end,
         },
@@ -107,8 +116,8 @@ return {
     -- A custom `on_attach` function to be run after the default `on_attach` function
     -- takes two parameters `client` and `bufnr`  (`:h lspconfig-setup`)
     -- on_attach = function(client, bufnr)
-      -- this would disable semanticTokensProvider for all clients
-      -- client.server_capabilities.semanticTokensProvider = nil
+    -- this would disable semanticTokensProvider for all clients
+    -- client.server_capabilities.semanticTokensProvider = nil
     -- end,
   },
 }
