@@ -16,10 +16,10 @@ return {
 
         -- install formatters
         "stylua",
-        "black",
 
         -- install any other package
         "tree-sitter-cli",
+        "ruff",
       },
     },
   },
