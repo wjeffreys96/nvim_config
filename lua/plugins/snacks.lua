@@ -1,5 +1,3 @@
--- if true then return {} end
-
 return {
   "folke/snacks.nvim",
   opts = {
@@ -15,7 +13,7 @@ return {
       files = {
         hidden = true,
         ignored = true,
-      }
+      },
     },
     notifier = { enabled = true },
     quickfile = { enabled = true },
