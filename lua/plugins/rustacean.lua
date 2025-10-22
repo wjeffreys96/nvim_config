@@ -11,6 +11,7 @@ vim.g.rustaceanvim = {
       ["rust-analyzer"] = {
         cargo = {
           allTargets = false,
+          allFeatures = true,
         },
       },
     },
