@@ -7,7 +7,7 @@ return {
   ---@type AstroUIOpts
   opts = {
     -- change colorscheme
-    colorscheme = "astrodark",
+    colorscheme = "gruvbox",
     -- AstroUI allows you to easily modify highlight groups easily for any and all colorschemes
     highlights = {
       init = {
@@ -16,10 +16,10 @@ return {
       },
       astrodark = { -- a table of overrides/changes when applying the astrotheme theme
         MatchParen = { fg = "#f5f5f5", bg = "#424242" },
-        Constant = { fg = "#ff7043" },
-        Identifier = { fg = "#eeeeee" },
-        Structure = { fg = "#dd97f1" },
-        ["@type.builtin"] = { italic = true, fg = "#ffb74d" },
+        -- Constant = { fg = "#ff7043" },
+        -- Identifier = { fg = "#eeeeee" },
+        -- Structure = { fg = "#dd97f1" },
+        -- ["@type.builtin"] = { italic = true, fg = "#ffb74d" },
       },
     },
     -- Icons can be configured throughout the interface
