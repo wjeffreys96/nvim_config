@@ -12,7 +12,6 @@ return {
         -- install language servers
         "lua-language-server",
         "clangd",
-        "basedpyright",
 
         -- install formatters
         "stylua",
