@@ -12,6 +12,7 @@ return {
         -- install language servers
         "lua-language-server",
         "clangd",
+        "mypy",
 
         -- install formatters
         "stylua",
