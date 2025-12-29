@@ -1,6 +1,7 @@
 -- AstroLSP allows you to customize the features in AstroNvim's LSP configuration engine
 -- Configuration documentation can be found with `:h astrolsp`
 ---@type LazySpec
+local oresat_zephyr_path = "/home/will/distroboxes/oresat-zephyr/src/oresat/firmware"
 return {
   "AstroNvim/astrolsp",
   ---@type AstroLSPOpts
@@ -35,11 +36,56 @@ return {
     },
     -- enable servers that you already have installed without mason
     servers = {
-      -- "pyright"
+      "dts_lsp",
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
+      dts_lsp = {
+        settings = {
+          devicetree = {
+            defaultIncludePaths = {},
+            cwd = string.format("%s", vim.fn.getcwd()),
+            defaultShowFormattingErrorAsDiagnostics = false,
+            defaultBindingType = "Zephyr",
+            defaultZephyrBindings = {},
+            autoChangeContext = true,
+            allowAdhocContexts = true,
+            contexts = {
+              {
+                ctxName = "frdm_mcxn947",
+                cwd = "/home/will/dev/zephyr_pg",
+                includePaths = {
+                  oresat_zephyr_path .. "/modules/hal/nxp/dts",
+                  oresat_zephyr_path .. "/modules/hal/stm32/dts",
+                  oresat_zephyr_path .. "/zephyr/include",
+                  oresat_zephyr_path .. "/zephyr/include/zephyr",
+                  oresat_zephyr_path .. "/zephyr/dts/common",
+                  oresat_zephyr_path .. "/zephyr/dts/vendor",
+                  oresat_zephyr_path .. "/zephyr/dts/rx",
+                  oresat_zephyr_path .. "/zephyr/dts/x86",
+                  oresat_zephyr_path .. "/zephyr/dts/xtensa",
+                  oresat_zephyr_path .. "/zephyr/dts/sparc",
+                  oresat_zephyr_path .. "/zephyr/dts/riscv",
+                  oresat_zephyr_path .. "/zephyr/dts/posix",
+                  oresat_zephyr_path .. "/zephyr/dts/arm64",
+                  oresat_zephyr_path .. "/zephyr/dts/arm",
+                  oresat_zephyr_path .. "/zephyr/dts/arc",
+                  oresat_zephyr_path .. "/zephyr/dts",
+                },
+                dtsFile = oresat_zephyr_path .. "/zephyr/boards/nxp/frdm_mcxn947/frdm_mcxn947_mcxn947_cpu0.dts",
+                overlays = {
+                  "/home/will/dev/zephyr_pg/boards/frdm_mcxn947_mcxn947_cpu0.overlay",
+                },
+                bindingType = "Zephyr",
+                zephyrBindings = {
+                  oresat_zephyr_path .. "/zephyr/dts/bindings",
+                },
+              },
+            },
+          },
+        },
+      },
       rust_analyzer = {
         settings = {
           ["rust-analyzer"] = {
@@ -54,15 +100,74 @@ return {
     },
     -- customize how language servers are attached
     handlers = {
-      clangd = function(_, opts)
-        -- if vim.fn.getcwd() == "/home/will/Repos/oresat/oresat-firmware" then
-        opts.cmd = {
-          "clangd",
-          "--query-driver=/usr/bin/arm-none-eabi-gcc",
+      dts_lsp = function(_, opts)
+        opts.cmd = { "devicetree-language-server", "--stdio" }
+        opts.filetypes = { "dts", "dtsi" }
+        opts.root_dir = require("lspconfig").util.root_pattern("zephyr", ".git", ".")
+
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+        -- Enable semantic tokens
+        capabilities.textDocument = capabilities.textDocument or {}
+        capabilities.textDocument.semanticTokens = {
+          dynamicRegistration = false,
+          requests = {
+            range = false,
+            full = true,
+          },
+          tokenTypes = {
+            "namespace",
+            "class",
+            "enum",
+            "interface",
+            "struct",
+            "typeParameter",
+            "type",
+            "parameter",
+            "variable",
+            "property",
+            "enumMember",
+            "decorator",
+            "event",
+            "function",
+            "method",
+            "macro",
+            "label",
+            "comment",
+            "string",
+            "keyword",
+            "number",
+            "regexp",
+            "operator",
+          },
+          tokenModifiers = {
+            "declaration",
+            "definition",
+            "readonly",
+            "static",
+            "deprecated",
+            "abstract",
+            "async",
+            "modification",
+            "documentation",
+            "defaultLibrary",
+          },
+          formats = { "relative" },
         }
-        -- end
-        ---@diagnostic disable: param-type-mismatch
-        require("lspconfig")["clangd"].setup(opts)
+
+        -- Enable formatting
+        capabilities.textDocument.formatting = {
+          dynamicRegistration = false,
+        }
+
+        -- Enable folding range support
+        capabilities.textDocument.foldingRange = {
+          dynamicRegistration = false,
+          lineFoldingOnly = true,
+        }
+
+        opts.capabilities = capabilities
+        require("lspconfig")["dts_lsp"].setup(opts)
       end,
       -- a function without a key is simply the default handler, functions take two parameters, the server name and the configured options table for that server
       -- function(server, opts) require("lspconfig")[server].setup(opts) end
@@ -107,7 +212,7 @@ return {
           function() require("astrolsp.toggles").buffer_semantic_tokens() end,
           desc = "Toggle LSP semantic highlight (buffer)",
           cond = function(client)
-            ---@diagnostic disable-next-line: missing-parameter
+            ---@diagnostic disable-next-line: missing-parameter, param-type-mismatch
             return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens ~= nil
           end,
         },

@@ -32,6 +32,8 @@ return {
         listchars = {
           eol = "⏎",
           trail = "␣",
+          tab = "␉·",
+          nbsp = "␠",
         },
       },
       g = { -- vim.g.<key>
@@ -55,7 +57,7 @@ return {
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
         -- ["<Leader>b"] = { desc = "Buffers" },
-        ["<Leader>r"] = { desc = "Rust Tools" }
+        ["<Leader>r"] = { desc = "Rust Tools" },
 
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
