@@ -169,6 +169,24 @@ return {
         opts.capabilities = capabilities
         require("lspconfig")["dts_lsp"].setup(opts)
       end,
+
+      neocmake = function(_, opts)
+        opts.cmd = { "neocmakelsp", "stdio" }
+        opts.filetypes = { "cmake" }
+        opts.root_dir = function(fname) return require("lspconfig").util.find_git_ancestor(fname) end
+        opts.single_file_support = true -- suggested
+        opts.init_options = {
+          format = {
+            enable = true,
+          },
+          lint = {
+            enable = true,
+          },
+          scan_cmake_in_package = true, -- default is true
+        }
+        require("lspconfig")["neocmake"].setup(opts)
+      end,
+
       -- a function without a key is simply the default handler, functions take two parameters, the server name and the configured options table for that server
       -- function(server, opts) require("lspconfig")[server].setup(opts) end
 

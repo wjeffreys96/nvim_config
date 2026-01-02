@@ -13,6 +13,7 @@ return {
         "lua-language-server",
         "clangd",
         "mypy",
+        "neocmakelsp",
 
         -- install formatters
         "stylua",
